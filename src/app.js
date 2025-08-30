@@ -2,6 +2,8 @@ const express=require("express");
 const connectDB=require("./config/database.js");
 const app=express();
 app.use(express.json());
+const authRouter=require("./router/auth.js")
+app.use("/",authRouter)
 
 connectDB()
 .then(()=>{
