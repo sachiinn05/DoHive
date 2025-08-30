@@ -1,0 +1,19 @@
+{
+  "name": "dohive",
+  "version": "1.0.0",
+  "description": "DoHive → hive of people helping each other with tasks",
+  "license": "ISC",
+  "author": "Sachin Singh",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+     "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "mongodb": "^6.19.0",
+    "mongoose": "^8.18.0",
+    "nodemon": "^3.1.10"
+  }
+}
