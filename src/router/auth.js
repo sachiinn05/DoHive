@@ -2,6 +2,7 @@ const express=require("express");
 const authRouter=express();
 const bcrypt=require("bcrypt")
 const User=require("../model/user")
+const jwt = require('jsonwebtoken')
 
 const validateSignUpData=require("../utils/validation")
 authRouter.post("/signup",async(req,res)=>{
@@ -22,6 +23,30 @@ authRouter.post("/signup",async(req,res)=>{
          res.status(400).send("ERROR : "+ err.message)
     }
 });
+
+authRouter.post('/reset-password',async(req,res)=>{
+    const {emailId} = req.body;
+    console.log("🚀 ~ emailId:", emailId)
+    const user = await User.findOne({emailId: emailId});
+    if (!user) {
+        throw new Error("Email ID not found");
+    }
+    const token =await jwt.sign({id : user._id},"mysecretkey",{expiresIn: '15m'})
+    res.status(200).json({"token": token})
+});
+
+
+authRouter.post('/reset-password/:token',async(req,res)=>{
+    const {token} = req.params;
+    const {id} = jwt.verify(token,"mysecretkey" )
+    const {password} = req.body;
+    const passwordHash= await bcrypt.hash(password,10);
+    await User.findByIdAndUpdate(id,{password: passwordHash});
+    res.status(200).json({message: "Password Changed Successfully"})
+});
+
+
+
 authRouter.post("/login",async(req,res)=>{
     try{
     const {emailId,password}=req.body;
@@ -48,6 +73,7 @@ authRouter.post("/login",async(req,res)=>{
 }
 
 });
+
 authRouter.post("/logout",async(req,res)=>{
   res.cookie("token",null,{
     expires:new Date(Date.now()),
