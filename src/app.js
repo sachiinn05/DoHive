@@ -5,7 +5,9 @@ const app=express();
 app.use(express.json());
 app.use(cookieParser());
 const authRouter=require("./router/auth.js")
-app.use("/",authRouter)
+const profileRouter=require("./router/profile.js")
+app.use("/",authRouter);
+app.use("/",profileRouter);
 
 connectDB()
 .then(()=>{
