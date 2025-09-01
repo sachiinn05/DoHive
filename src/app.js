@@ -6,8 +6,10 @@ app.use(express.json());
 app.use(cookieParser());
 const authRouter=require("./router/auth.js")
 const profileRouter=require("./router/profile.js")
+const taskRouter=require("./router/task.js");
 app.use("/",authRouter);
 app.use("/",profileRouter);
+app.use("/",taskRouter);
 
 connectDB()
 .then(()=>{
