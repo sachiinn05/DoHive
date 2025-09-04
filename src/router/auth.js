@@ -4,7 +4,7 @@ const bcrypt=require("bcrypt")
 const User=require("../model/user")
 const jwt = require('jsonwebtoken')
 
-const validateSignUpData=require("../utils/validation")
+const {validateSignUpData}=require("../utils/validation")
 authRouter.post("/signup",async(req,res)=>{
     try{
          validateSignUpData(req);
