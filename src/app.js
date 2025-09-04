@@ -7,9 +7,11 @@ app.use(cookieParser());
 const authRouter=require("./router/auth.js")
 const profileRouter=require("./router/profile.js")
 const taskRouter=require("./router/task.js");
+const completedTask=require("./router/completedTask.js")
 app.use("/",authRouter);
 app.use("/",profileRouter);
 app.use("/",taskRouter);
+app.use("/",completedTask);
 
 connectDB()
 .then(()=>{
