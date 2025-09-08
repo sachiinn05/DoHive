@@ -2,7 +2,6 @@ const express=require("express");
 const taskRouter=express.Router();
 const Task=require("../model/task");
 const {userAuth}=require("../middleware/auth");
-const { create } = require("../model/user");
 const User = require("../model/user");
 
 taskRouter.post("/task/send/:status",userAuth,async (req,res) => {

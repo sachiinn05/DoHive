@@ -32,4 +32,3 @@ completedTask.post("/completedTask/:taskId", userAuth, async (req, res) => {
 
 module.exports = completedTask;
 
-module.exports=completedTask
