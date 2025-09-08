@@ -8,10 +8,12 @@ const authRouter=require("./router/auth.js")
 const profileRouter=require("./router/profile.js")
 const taskRouter=require("./router/task.js");
 const completedTask=require("./router/completedTask.js")
+const taskInfo = require("./router/taskInfo.js");
 app.use("/",authRouter);
 app.use("/",profileRouter);
 app.use("/",taskRouter);
 app.use("/",completedTask);
+app.use("/",taskInfo)
 
 connectDB()
 .then(()=>{
